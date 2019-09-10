@@ -8,8 +8,7 @@ body {
 }
 
 .movieCard {
-    border: 1px solid gray;
-    border-radius: 5px;
+    border-left: 5px solid gray;
     padding: 10px;
     margin-bottom: 10px;
 }
