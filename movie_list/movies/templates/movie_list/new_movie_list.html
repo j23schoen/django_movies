@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'movie_list:create' %}" method="post">
+    {% csrf_token %}
+    <label>name of your awesome movie list!</label>
+    <input name="name" required>
+    <button type="submit">CREATE THAT LIST</button>
+</form>
+</body>
+</html>

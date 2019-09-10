@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'movie_list/movie_list.css' %}">
+</head>
+<body>
+<a href="{% url 'movie_list:index' %}">see all my movie lists</a>
+<h1>{{ movie_list.list.name }}</h1>
+<hr/>
+{% if movie_list.movies %}
+    <h2>Movies</h2>
+    <div class="movieCardWrapper">
+        {% for movie in movie_list.movies %}
+            <div class="movieCard">
+                <p><strong>Title:</strong> {{ movie.title }}</p>
+                <p><strong>Released: </strong>{{ movie.release_year }}</p>
+                <p><strong>Genre: </strong>{{ movie.genre }}</p>
+                <p><strong>Average Rating: {{ movie.rating }}</strong></p>
+{#                <p><strong>My Rating: {{ movie.rating }}</strong></p>#}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+</body>
+</html>
