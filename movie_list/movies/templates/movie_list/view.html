@@ -10,6 +10,22 @@
 <a href="{% url 'movie_list:index' %}">see all my movie lists</a>
 <h1>{{ movie_list.list.name }}</h1>
 <hr/>
+{% if available_movies %}
+    <form action="{% url 'movie_list:add_movie_to_list'  %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <label>choose a movie to add to this list:</label>
+            <select name="movie_id">
+                <option disabled selected>select a movie!</option>
+                {% for movie in available_movies %}
+                    <option value="{{ movie.id }}" >{{ movie.name }}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="movie_list_id" value="{{ movie_list.list.id }}">
+            <button type="submit">ADD IT</button>
+        </div>
+    </form>
+{% endif %}
 {% if movie_list.movies %}
     <h2>Movies</h2>
     <div class="movieCardWrapper">
@@ -18,8 +34,8 @@
                 <p><strong>Title:</strong> {{ movie.title }}</p>
                 <p><strong>Released: </strong>{{ movie.release_year }}</p>
                 <p><strong>Genre: </strong>{{ movie.genre }}</p>
-                <p><strong>Average Rating: </strong>{{ movie.rating }}</p>
-{#                <p><strong>My Rating: {{ movie.rating }}</strong></p>#}
+                <p><strong>Average Rating: </strong>{{ movie.average_rating }}</p>
+                <p><strong>My Rating: </strong> {{ movie.my_rating }}</p>
             </div>
         {% endfor %}
     </div>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'movie_list:create_movie' %}" method="post">
+    {% csrf_token %}
+    <div>
+        <label>movie title:</label>
+        <input name="name" required>
+    </div>
+    <div>
+        <label>release year:</label>
+        <input name="release_year" required>
+    </div>
+    <div>
+        <label>genre:</label>
+        <input name="genre" required>
+    </div>
+    <button type="submit">CREATE THAT MOVIE</button>
+</form>
+
+</body>
+</html>

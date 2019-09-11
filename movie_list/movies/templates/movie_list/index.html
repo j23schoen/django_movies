@@ -5,15 +5,28 @@
     <title>Movie List</title>
 </head>
 <body>
-
-{% if movie_lists %}
-    <ul>
-    {% for movie_list in movie_lists %}
-        <li><a href="{% url 'movie_list:view' movie_list.list.id %}">{{ movie_list.list.name }}</a></li>
-        <p>Number of movies: {{ movie_list.number_of_movies }}</p>
-        <p>Average rating: </p>
-    {% endfor %}
-    </ul>
+{% if not user.is_authenticated %}
+    <div>
+        <h3>you must login or sign up to create/view your movie lists</h3>
+        <a href="{% url 'movie_list:login' %}">Login</a>
+        <a href="{% url 'movie_list:sign_up' %}">Sign up</a>
+    </div>
+{% else %}
+    <div>
+        <a href="{% url 'movie_list:log_out' %}">Log out</a>
+    </div>
+    <div>
+        <a href="{% url 'movie_list:new_movie' %}">Create a movie</a>
+    </div>
+    {% if movie_lists %}
+        <ul>
+        {% for movie_list in movie_lists %}
+            <li><a href="{% url 'movie_list:view' movie_list.list.id %}">{{ movie_list.list.name }}</a></li>
+            <p>Number of movies: {{ movie_list.number_of_movies }}</p>
+            <p>Average rating: </p>
+        {% endfor %}
+        </ul>
+    {% endif %}
 {% endif %}
 <a href="{% url 'movie_list:new' %}">Create a movie list!</a>
 
